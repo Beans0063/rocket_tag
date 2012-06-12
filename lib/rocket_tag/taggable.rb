@@ -103,8 +103,10 @@ module RocketTag
 
         conditions = contexts.map do |context|
           _tags = send context.to_sym
+          _context = context.to_s
+
           self.class.squeel do
-            (tags.name.in(my{_tags}) & (taggings.context == my{context}))
+            (tags.name.in(my{_tags}) & (taggings.context == _context))
           end
         end
 
